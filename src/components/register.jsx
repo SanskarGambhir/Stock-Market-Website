@@ -50,53 +50,38 @@ export default function Register() {
     }
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       // Update Firebase User Profile
-      await updateProfile(userCredential.user, {
-        displayName: name,
-      });
-
+      await updateProfile(userCredential.user, { displayName: name });
       const userdata = {
         uid: userCredential.user.uid,
         displayName: name,
         email: userCredential.user.email,
         phoneNumber: mobile,
       };
-
-      // Update state
       setloginUser(userdata);
-
-      // Save user to Firestore
       await saveUserToFirestore(userdata);
     } catch (error) {
       setError(error.message);
     }
-
     setLoading(false);
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-96">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-800 to-gray-900">
+      <div className="bg-white/10 border border-white/10 backdrop-blur-xl shadow-lg rounded-xl p-10 w-full max-w-md transform transition duration-200 hover:scale-102">
+        <h2 className="text-2xl font-bold text-center text-gray-200 mb-6">
           Register
         </h2>
 
-        {error && (
-          <p className="text-red-500 text-sm text-center mb-3">{error}</p>
-        )}
+        {error && <p className="text-red-500 text-sm text-center mb-3">{error}</p>}
 
         <input
           type="text"
           placeholder="Full Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full p-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full p-3 mb-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-white transition-all duration-300"
         />
 
         <input
@@ -104,7 +89,7 @@ export default function Register() {
           placeholder="Mobile Number"
           value={mobile}
           onChange={(e) => setMobile(e.target.value)}
-          className="w-full p-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full p-3 mb-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-white transition-all duration-300"
         />
 
         <input
@@ -112,7 +97,7 @@ export default function Register() {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full p-3 mb-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-white transition-all duration-300"
         />
 
         <input
@@ -120,22 +105,22 @@ export default function Register() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full p-3 mb-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-white transition-all duration-300"
         />
 
         <button
           onClick={handleSignup}
-          className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition mb-4"
+          className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition mb-4"
           disabled={loading}
         >
           {loading ? "Signing up..." : "Register"}
         </button>
 
-        <hr className="my-4 border-gray-300" />
+        <hr className="my-4 border-white/50" />
 
         <button
           onClick={handleGoogleSignup}
-          className="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition flex items-center justify-center"
+          className="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition flex items-center justify-center"
           disabled={loading}
         >
           {loading ? "Signing in..." : "Sign up with Google"}

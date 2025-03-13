@@ -8,6 +8,7 @@ import {
   createUserWithEmailAndPassword,
 } from "../firebase";
 import { AppContext } from "../context/appContext";
+import { Button } from "@/components/ui/button";
 
 export default function Login() {
   const [user, setUser] = useState(null);
@@ -37,11 +38,7 @@ export default function Login() {
     setLoading(true);
     setError("");
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
       setUser(userCredential.user);
       setloginUser(userCredential.user);
     } catch (error) {
@@ -55,11 +52,7 @@ export default function Login() {
     setLoading(true);
     setError("");
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       setUser(userCredential.user);
       setloginUser(userCredential.user);
     } catch (error) {
@@ -84,72 +77,72 @@ export default function Login() {
   console.log(loginUser);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-96">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-800 to-gray-900">
+      <div className="bg-white/10 border border-white/10 backdrop-blur-xl shadow-lg rounded-xl p-10 w-full max-w-md transform transition duration-300 hover:scale-102">
         {user ? (
           <div className="text-center">
-            <h2 className="text-xl font-semibold mb-4">
-              {/* Welcome, {loginUser.displayName || "User"}! */}
+            <h2 className="text-xl font-semibold mb-4 text-gray-200">
+              Welcome, {loginUser?.displayName || "User"}!
             </h2>
             {user.photoURL && (
               <img
                 src={user.photoURL}
                 alt="User Avatar"
-                className="w-20 h-20 rounded-full mx-auto mb-4"
+                className="w-24 h-24 rounded-full mx-auto mb-4 border-2 border-gray-700 transition-transform duration-300 hover:scale-110"
               />
             )}
-            <button
+            <Button
               onClick={handleLogout}
-              className="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition"
+              className="w-full bg-gray-600 text-gray-100 py-2 rounded-md hover:bg-gray-700 transition ease-in-out duration-300"
               disabled={loading}
             >
               {loading ? "Logging out..." : "Logout"}
-            </button>
+            </Button>
           </div>
         ) : (
           <div>
-            <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
-              Login
-            </h2>
-            {error && (
-              <p className="text-red-500 text-sm text-center mb-3">{error}</p>
-            )}
+            <h2 className="text-2xl font-bold text-center text-gray-200 mb-6">Login</h2>
+            {error && <p className="text-red-500 text-sm text-center mb-3">{error}</p>}
             <input
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full p-3 mb-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-white transition-all duration-300"
             />
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-2 mb-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full p-3 mb-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 text-white transition-all duration-300"
             />
-            <button
+            <Button
               onClick={handleEmailLogin}
-              className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition mb-2"
+              className="w-full bg-blue-600 text-gray-100 py-2 rounded-lg hover:bg-blue-700 transition ease-in-out duration-300 mb-2"
               disabled={loading}
             >
               {loading ? "Logging in..." : "Login with Email"}
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={handleSignup}
-              className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition mb-4"
+              className="w-full bg-green-600 text-gray-100 py-2 rounded-lg hover:bg-green-700 transition ease-in-out duration-300 mb-4"
               disabled={loading}
             >
               {loading ? "Signing up..." : "Sign Up"}
-            </button>
-            <hr className="my-4 border-gray-300" />
-            <button
+            </Button>
+            <div className="flex items-center my-4">
+              <hr className="flex-grow border-gray-700" />
+              <span className="mx-2 text-gray-200">or</span>
+              <hr className="flex-grow border-gray-700" />
+            </div>
+            <Button
               onClick={handleGoogleLogin}
-              className="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition flex items-center justify-center"
+              className="w-full bg-red-600 text-gray-100 py-2 rounded-lg hover:bg-red-700 transition ease-in-out duration-300 flex items-center justify-center"
               disabled={loading}
             >
               {loading ? "Signing in..." : "Sign in with Google"}
-            </button>
+            </Button>
           </div>
         )}
       </div>
