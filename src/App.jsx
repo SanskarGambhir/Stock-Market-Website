@@ -13,7 +13,7 @@ import PortfolioPage from "./pages/Portfolio";
 import ErrorPage from "./components/errorpage";
 import ChatBot from "./components/Chatbot";
 import Pay from "./components/Pay";
-import LiveObjectDetection from "./components/imageClass";
+//import LiveObjectDetection from "./components/imageClass";
 import Watchlist from "./components/Watchlist";
 import StockPage from "./components/StockPage";
 import SIPCalculator from "./components/SIPCalculator";
@@ -29,8 +29,8 @@ import BondsAndSecuritiesComponent from "./components/Bonds";
 import Profile from "./pages/profile";
 import OverallReport from "./components/overReport";
 import StockIndexPreview from "./components/StockIndices";
-import LiveFaceMesh from "./components/imageClass";
-import ImageFaceMesh from "./components/imageClass";
+//import LiveFaceMesh from "./components/imageClass";
+//import ImageFaceMesh from "./components/imageClass";
 
 function App() {
   const { loginUser, setloginUser } = useContext(AppContext);
@@ -88,11 +88,11 @@ function App() {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/investments" element={<InvestmentsPage />} />
             <Route path="/portfolio" element={<PortfolioPage />} />
-            <Route path="/about" element={<LiveObjectDetection />} />
+            {/* <Route path="/about" element={<LiveObjectDetection />} /> */}
             <Route path="*" element={<ErrorPage />} />
             <Route path="/chat" element={<ChatBot />} />
             <Route path="/pay" element={<Pay />} />
-            <Route path="/live" element={<ImageFaceMesh />} />
+            {/* <Route path="/live" element={<ImageFaceMesh />} /> */}
             <Route
               path="/watchlist"
               element={<Watchlist stocks={sampleStocks} bonds={sampleBonds} />}
